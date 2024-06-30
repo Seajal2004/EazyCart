@@ -5,15 +5,16 @@ import Header from './Header.jsx';
 import Home from './Home.jsx';
 import Detail from './Detail.jsx';
 import {Error1} from './Error.jsx';
+import Cart from './cart.jsx';
 
 function App() {
-  const savedData = localStorage.getItem("added-items") || "{}";
+  const savedData = localStorage.getItem("added-item") || "{}";
   const convertData = JSON.parse(savedData);
   const [cart,setCart] = useState(convertData);
   function addToCart(productId,count){
     const old = cart[productId] || 0;
     setCart({...cart,[productId]:old+count})
-    localStorage.setItem("added-items",JSON.stringify({...cart,[productId]:old+count}))
+    localStorage.setItem("added-item",JSON.stringify({...cart,[productId]:old+count}))
 
   }
 
@@ -27,7 +28,7 @@ function App() {
       <Route index element={<Home />}></Route>
       <Route path="/product/:id" element={<Detail handleCart={addToCart}/>}></Route>
       <Route path="*" element={<Error1 />}></Route>
-      <Route path="/my_cart" element={<Cart />}></Route>
+      <Route path="/my_cart" element={<Cart cart = {cart} />}></Route>
       </Routes>
       <Footer />
     </div>
