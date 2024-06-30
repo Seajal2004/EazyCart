@@ -60,7 +60,7 @@ if(ProductList.length==0){
 }
     return(
         <div id="main" className="bg-gray-200">
-        <div className="flex flex-col gap-5 my-10 mx-16 bg-white px-16 py-16">
+        <div className="flex flex-col gap-5 my-10 sm:mx-16 bg-white sm:px-16 py-16">
           <div className="flex justify-between">
             <input className="border px-2 py-1" type="text" placeholder="Filter By category or title" onChange={Filtered}/>
           <select onChange={sortMethod} value={srt}>
