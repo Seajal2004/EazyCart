@@ -27,6 +27,7 @@ function App() {
       <Route index element={<Home />}></Route>
       <Route path="/product/:id" element={<Detail handleCart={addToCart}/>}></Route>
       <Route path="*" element={<Error1 />}></Route>
+      <Route path="/my_cart" element={<Cart />}></Route>
       </Routes>
       <Footer />
     </div>
