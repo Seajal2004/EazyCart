@@ -14,7 +14,7 @@ function cart_product_detail({id, quantity}){
  
     return(
        <>
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-evenly mr-4 sm:mr-0"> 
+        <div className="flex flex-col gap-4 sm:flex-row sm:justify-evenly mr-4 sm:mr-0 sm:py-2"> 
             <img className="border max-w-16 max-h-16" src={product.images[0]} />
             <h2 className="self-center bold text-xl text-orange-600">{product.title}</h2>
             <h2 className="self-center bold text-xl">{product.price}</h2>
