@@ -53,9 +53,10 @@ function Filtered(event){
 }
 if(ProductList.length==0){
     return (
-        <div className='text-6xl self-center'>
-          <ImSpinner6 className='animate-spin'/>
-        </div>
+      <div className='self-center flex flex-col gap-3'>
+      <ImSpinner6 className='text-6xl animate-spin'/>
+      <h1 className="text-2xl relative right-8">Please Wait...</h1>
+    </div>
     )
 }
     return(
