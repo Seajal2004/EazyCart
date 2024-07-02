@@ -43,7 +43,7 @@ function cart({cart}){
                { cart_product.map(function(item){
                     return(
                         <>
-                        <Cart cart={item} quantity={item.id}/>
+                        <Cart cart={item} quantity={cart[item.id]}/>
                         </>
                     )
                 })}
