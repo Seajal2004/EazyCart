@@ -29,7 +29,14 @@ function cart({cart}){
             setCart(product)
     })
    },[])
-   
+   if(cart_product.length==0){
+    return (
+        <div className='self-center flex flex-col gap-3'>
+          <ImSpinner6 className='text-6xl animate-spin'/>
+          <h1 className="text-2xl relative right-8">Please Wait...</h1>
+        </div>
+    )
+   }
     return(
         <div className="flex flex-col gap-4">
         <Link className="self-center border rounded-md bg-orange-500 text-white px-4 py-1" to="/">Home</Link>
@@ -41,10 +48,8 @@ function cart({cart}){
                 <h3 className="bold text-2xl">Quantity</h3>
                 <h3 className="bold text-2xl">Subtotal</h3>
             </div>
-                {cart_product.length==0 && <div className='text-4xl self-center'>
-                                            <ImSpinner6 className='animate-spin'/>
-                                            </div>}
-               {cart_product.length>0 && cart_product.map(function(item){
+                
+               {cart_product.map(function(item){
                     return(
                         <>
                         <Cart cart={item} quantity={cart[item.id]}/>
@@ -62,10 +67,8 @@ function cart({cart}){
         </div>
         <div className="border self-end sm:mx-8 flex flex-col gap-4 min-w-80 max-w-96 px-4 py-2">
             <h1 className="px-2 py-2 bold text-xl bg-gray-100">Cart totals</h1>
-            {cart_product.length==0 && <div className='text-4xl self-center'>
-                                            <ImSpinner6 className='animate-spin'/>
-                                            </div>}
-            {cart_product.length>0 && <div className="flex flex-col gap-2">
+            
+            <div className="flex flex-col gap-2">
             <div className="px-2 flex gap-16">
                 <h2>Subtotal</h2>
                 <h2>${totalCount}</h2>
@@ -76,7 +79,7 @@ function cart({cart}){
                 <h2>${totalCount}</h2>
             </div>
             <hr />
-            </div>}
+            </div>
             <button className="border rounded-md bg-red-500 text-white px-4 py-2">Proceed To Checkout</button>
         </div>
         </div>
