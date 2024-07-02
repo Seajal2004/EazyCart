@@ -3,16 +3,11 @@ import { Link} from 'react-router-dom';
 import Cart from "./cart_product_detail";
 import { getProduct } from "./api";
 function cart({cart}){
+    const [cart_product,setCart] = useState([]);
     const keys_array = Object.keys(cart);
-    const totalCount =  Object.keys(cart).reduce(function(previous,current){
-        const [product_cost,set] = useState(0);
-    useEffect(function(){
-        getProduct(current).then(function(data){
-            set(data.price)
-            })
-    },[])
-        return previous + cart[current]*product_cost;
-      },0)
+    const totalCount =  cart_product.reduce(function(previous,current){
+        return previous + current.price*cart[current.id];
+    },0)
        
     if(keys_array.length==0){
         return (
@@ -24,7 +19,15 @@ function cart({cart}){
             </div>
         )
     }
-
+    const allPromise = keys_array.map(function(id){
+        return getProduct(id);
+    })
+    const allPromises = Promise.all(allPromise);
+    useEffect(function(){
+        allPromises.then(function(product){
+            setCart(product)
+    })
+   },[])
     return(
         <div className="flex flex-col gap-4">
         <Link className="self-center border rounded-md bg-orange-500 text-white px-4 py-1" to="/">Home</Link>
@@ -37,10 +40,10 @@ function cart({cart}){
                 <h3 className="bold text-2xl">Subtotal</h3>
             </div>
            
-               { keys_array.map(function(item){
+               { cart_product.map(function(item){
                     return(
                         <>
-                        <Cart id={item} quantity={cart[item]} />
+                        <Cart cart={item} quantity={item.id}/>
                         </>
                     )
                 })}
