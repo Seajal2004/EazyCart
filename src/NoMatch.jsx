@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 function NoMatch(){
    return(
     <div className="text-4xl">
@@ -7,4 +7,4 @@ function NoMatch(){
    ) 
 }
 
-export default NoMatch;
+export default memo(NoMatch);

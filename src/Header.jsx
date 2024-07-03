@@ -1,11 +1,10 @@
-import React from 'react';
+import React, {memo} from 'react';
 import { GrShop } from "react-icons/gr";
 import { Link } from 'react-router-dom';
-import Logo from "./images/Q.png"
-function Header({count}){
+function Header({count,src}){
     return(
         <div id="header" className="flex justify-between py-4 sm:mx-16 h-18" >
-        <img className="h-12" src={Logo} />
+        <img className="h-12" src={src} />
         <div className='relative mr-8'>
           <Link to="/my_cart">
         <GrShop className='absolute text-4xl text-orange-400'/>
@@ -15,4 +14,4 @@ function Header({count}){
       </div>
     )
 }
-export default Header;<q></q>
+export default memo(Header);

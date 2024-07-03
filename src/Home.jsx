@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo,useCallback} from 'react';
 import Products from './Products.jsx';
 import NoMatch from './NoMatch.jsx';
 import getData from './api.js';
@@ -6,6 +6,7 @@ import { ImSpinner6 } from "react-icons/im";
 function Home(){
     const [ProductList,setLists] = useState([]);
     useEffect(function(){
+
         let prlist = getData();
         prlist.then(function(products){
             setLists(products);
@@ -15,13 +16,16 @@ function Home(){
     const [srt ,setsrt] = useState("Default");
   const [flt ,setflt] = useState("");
 let data = [...ProductList];
-data  = data.filter(function(item) {
+useMemo(function(){
+  if(flt!=""){
+  data  = data.filter(function(item) {
   const categ = item.category.toLowerCase();
   const nme = item.title.toLowerCase();
   const filt = flt.toLowerCase();
   return categ.indexOf(filt) != -1 || nme.indexOf(filt) != -1;
 })
-
+}},[flt,data])
+  useMemo(function(){
    if(srt == "Low to heigh Price"){
      data.sort(function(x,y) {
        return x.price -y.price;
@@ -42,15 +46,13 @@ data  = data.filter(function(item) {
       return y.category>x.category?-1:1;
     })
   }
-function sortMethod(event){
-  const newValue  = event.target.value;
-
-  
-  setsrt(newValue);
-}
-function Filtered(event){
+},[srt,data]);
+const sortMethod = useCallback(function(event){
+  setsrt(event.target.value);
+},[srt])
+const Filtered = useCallback(function(event){
   setflt(event.target.value);
-}
+},[flt]);
 if(ProductList.length==0){
     return (
       <div className='self-center flex flex-col gap-3'>

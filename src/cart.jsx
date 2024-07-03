@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link} from 'react-router-dom';
 import Cart from "./cart_product_detail";
 import { getProduct } from "./api";
 import { ImSpinner6 } from "react-icons/im";
-function cart({cart}){
+function cart({cart, recent_cart}){
     const [cart_product,setCart] = useState([]);
-    const keys_array = Object.keys(cart);
+    const [dummy_cart,set_dummy] = useState(cart);
+    const keys_array = Object.keys(dummy_cart);
     const totalCount =  cart_product.reduce(function(previous,current){
-        return previous + current.price*cart[current.id];
+        return previous + current.price*dummy_cart[current.id];
     },0)
        
     if(keys_array.length==0){
@@ -27,8 +28,9 @@ function cart({cart}){
     useEffect(function(){
         allPromises.then(function(product){
             setCart(product)
+    
     })
-   },[])
+   },[keys_array])
    if(cart_product.length==0){
     return (
         <div className='self-center flex flex-col gap-3'>
@@ -37,12 +39,31 @@ function cart({cart}){
         </div>
     )
    }
+   function handle_count(id,dummy_count){
+    const d = {...dummy_cart};
+    d[id] = dummy_count;
+    set_dummy(d);
+   }
+   function dummy(id){
+    const d = {...dummy_cart};
+    d[id] = 0;
+    set_dummy(d);
+   }
+   function handle_cart(){
+   
+    const m = {...dummy_cart};
+    for(let i=0;i<keys_array.length;i++){
+        if(m[keys_array[i]]==0){
+            delete m[keys_array[i]];
+        }
+    }
+    recent_cart(m);
+   }
     return(
         <div className="flex flex-col gap-4">
         <Link className="self-center border rounded-md bg-orange-500 text-white px-4 py-1" to="/">Home</Link>
         <div className="mx-8 border border-gray-200 flex sm:flex-col">
-            <div className="flex flex-col gap-4 sm:flex-row py-2 px-16 sm:justify-evenly bg-gray-100">
-                <h3 className="bold text-2xl">Product</h3>
+            <div className="flex flex-col gap-4 sm:flex-row py-2 px-16 sm:justify-end sm:justify-between bg-gray-100">
                 <h3 className="bold text-2xl">Name</h3>
                 <h3 className="bold text-2xl">Price</h3>
                 <h3 className="bold text-2xl">Quantity</h3>
@@ -52,7 +73,7 @@ function cart({cart}){
                {cart_product.map(function(item){
                     return(
                         <>
-                        <Cart cart={item} quantity={cart[item.id]}/>
+                        <Cart cart={item} quantity={dummy_cart[item.id]} dummy_change={dummy} dummy_quan={handle_count}/>
                         </>
                     )
                 })}
@@ -62,7 +83,7 @@ function cart({cart}){
                     <input className="border border-gray-200 py-1 px-2" type="text" placeholder="Coupon Code"></input>
                     <button className="border rounded-md bg-red-500 px-6 text-white">Apply Coupon</button>
                 </div>
-                <button className="border rounded-md bg-red-500 px-6 text-white">Update Cart</button>
+                <button onClick={handle_cart} className="border rounded-md bg-red-500 px-6 text-white">Update Cart</button>
             </div>
         </div>
         <div className="border self-end sm:mx-8 flex flex-col gap-4 min-w-80 max-w-96 px-4 py-2">
