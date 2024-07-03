@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useMemo,useCallback } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos} from "react-icons/md";
 import { getProduct } from './api';
@@ -13,7 +13,12 @@ function Detail({handleCart}) {
     const [loading,setload] = useState(true);
     const [count,setCount] = useState(1);
     function setCart(event){
+      if(+event.target.value<=0){
+        setCount(1);
+      }
+      else{
       setCount(+event.target.value);
+      }
     }
     function changeCart(){
       handleCart(id,count);

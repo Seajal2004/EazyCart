@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 function Footer(){
     return(
     <div className="bg-gray-500 flex justify-between sm:px-8 py-4">
@@ -7,4 +7,4 @@ function Footer(){
         
       </div>
 );}
-export default Footer;
+export default memo(Footer);
