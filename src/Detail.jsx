@@ -52,9 +52,9 @@ function Detail({handleCart}) {
     <Link className=' mx-2 flex  self-start px-2 h-7' to="/">
     <MdOutlineArrowBackIos className='text-2xl font-bold'/> Back
     </Link>
-    <div className='flex gap-4'>
-    <img className="w-6/12 max-h-96" src={product.images[0]} alt={"product "+ id}/>
-    <div className="self-center mx-4 flex flex-col gap-3">
+    <div className='flex flex-col sm:flex-row gap-4'>
+    <img className="self-center w-6/12 max-h-96" src={product.images[0]} alt={"product "+ id}/>
+    <div className="items-center sm:self-center mx-4 flex flex-col gap-3">
       <h1 className="text-4xl font-bold text-gray-500">{product.title}</h1>
       <h3 className="text-3xl font-bold text-gray-500 my-5">${product.price}</h3>
       <p className="text-gray-400 mb-5">{product.description}</p>
