@@ -7,6 +7,9 @@ import Detail from './Detail.jsx';
 import {Error2} from './Error.jsx';
 import Cart from './cart.jsx';
 import Logo from "./images/Q.png"
+import Login from "./login_page.jsx"
+import SignUp from "./sign_up.jsx"
+import Forgot from "./forgot.jsx"
 function App() {
   const savedData = localStorage.getItem("added-item") || "{}";
   const convertData = JSON.parse(savedData);
@@ -34,6 +37,9 @@ function App() {
       <Route path="/product/:id" element={<Detail handleCart={addToCart}/>}></Route>
       <Route path="*" element={<Error2 />}></Route>
       <Route path="/my_cart" element={<Cart cart = {cart} recent_cart={updateCart}/>}></Route>
+      <Route path="/login" element={<Login />}></Route>
+      <Route path="/sign_up" element={<SignUp />}></Route>
+      <Route path="/forgot" element={<Forgot />}></Route>
       </Routes>
       <Footer />
     </div>
