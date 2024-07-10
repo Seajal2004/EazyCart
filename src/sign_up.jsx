@@ -3,9 +3,9 @@ import {  Formik, Form } from "formik";
 import { Link } from "react-router-dom";
 import { MdOutlineArrowBackIos} from "react-icons/md";
 import * as Yup from "yup";
-import Input from "./Input";
-
 import Created from "./Created";
+import { SelfFormikInput } from "./selfModifiedInput";
+import Button from "./FormButton";
 function sign_up(){
     const [pass,setpass] = useState(false)
     const [account_created,setAccount] = useState(false)
@@ -58,13 +58,13 @@ function sign_up(){
             onSubmit={createAccount}
             >
             <Form className="flex flex-col gap-1">
-                <Input name="username" id="username" type="text" label="Name" />
-                <Input name="dateOfBirth" id="dateOfBirth" type="date" label="Date Of Birth" />
-                <Input name="email" id="email" type="email" label="Email" />
-                <Input name="password" id="password" type="password" label="password" />
-                <Input name="confirm_password" id="confirm_password" type="password" label="Confirm Password" />
+                <SelfFormikInput name="username" id="username" type="text" label="Name" extraClasses="border rounded-md border-yellow-400 border-2 py-1 px-1" labelClasses="text-gray-900 text-lg" />
+                <SelfFormikInput name="dateOfBirth" id="dateOfBirth" type="date" label="Date Of Birth" extraClasses="border rounded-md border-yellow-400 border-2 py-1 px-1" labelClasses="text-gray-900 text-lg" />
+                <SelfFormikInput name="email" id="email" type="email" label="Email" extraClasses="border rounded-md border-yellow-400 border-2 py-1 px-1" labelClasses="text-gray-900 text-lg" />
+                <SelfFormikInput name="password" id="password" type="password" label="Password" extraClasses="border rounded-md border-yellow-400 border-2 py-1 px-1" labelClasses="text-gray-900 text-lg"/>
+                <SelfFormikInput name="confirm_password" id="confirm_password" type="password" label="Confirm Password" extraClasses="border rounded-md border-yellow-400 border-2 py-1 px-1" labelClasses="text-gray-900 text-lg" />
                 {pass && <p className="text-red-500">Password and Confirm password are not same</p>}
-                <button type="submit" className="my-6 border rounded-md bg-blue-600 text-white text-xl py-2 disabled:bg-blue-300">Create Acccount</button>
+                <Button name="Create Account" />
                 <p className="self-center">Already Account? <Link className="text-blue-600" to="/login">Sign in</Link></p>
             </Form>
             </Formik>

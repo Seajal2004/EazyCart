@@ -3,7 +3,8 @@ import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import { MdOutlineArrowBackIos} from "react-icons/md";
 import * as Yup from "yup";
-import Input from "./Input";
+import { FormikInput } from "./Input";
+import Button from "./FormButton";
 function forgot(){
     function sendData(){
         console.log(email.value)
@@ -28,8 +29,8 @@ function forgot(){
             onSubmit={sendData}
             >
             <Form className="flex flex-col gap-1">
-                <Input name="email" id="email" type="email" label="Email" />
-                <button type="submit" className="my-6 border rounded-md bg-blue-600 text-white text-xl py-2 disabled:bg-blue-300">Send Password</button>
+                <FormikInput name="email" id="email" type="email" label="Email" />
+                <Button name="Send Password"/>
                 <Link className="self-center" to="/login"><button className="border rounded-md bg-blue-600 text-white px-4 py-1 text-xl">Cancel</button></Link>
             </Form>
             </Formik>
