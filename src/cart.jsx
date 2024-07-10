@@ -3,6 +3,8 @@ import { Link} from 'react-router-dom';
 import Cart from "./cart_product_detail";
 import { getProduct } from "./api";
 import { ImSpinner6 } from "react-icons/im";
+import SelfModifiedInput from "./selfModifiedInput";
+import NormalButton from "./NormalButton";
 function cart({cart, recent_cart}){
     const [cart_product,setCart] = useState([]);
     const [dummy_cart,set_dummy] = useState(cart);
@@ -60,16 +62,16 @@ function cart({cart, recent_cart}){
     recent_cart(m);
    }
     return(
-        <div className="flex flex-col gap-4">
-        <Link className="self-center border rounded-md bg-orange-500 text-white px-4 py-1" to="/">Home</Link>
-        <div className="mx-8 border border-gray-200 flex sm:flex-col">
-            <div className="flex flex-col gap-4 sm:flex-row py-2 px-16 sm:justify-end sm:justify-between bg-gray-100">
+        <div className="flex flex-col gap-4 bg-gray-100 h-screen justify-center">
+        <NormalButton name={<Link to="/">Home</Link>} extraclasses="self-center bg-orange-600" />
+        <div className="mx-8 border border-gray-200 flex sm:flex-col bg-white">
+            <div className="flex flex-col gap-4 sm:flex-row py-2 px-16  sm:justify-between">
                 <h3 className="bold text-2xl">Name</h3>
                 <h3 className="bold text-2xl">Price</h3>
                 <h3 className="bold text-2xl">Quantity</h3>
                 <h3 className="bold text-2xl">Subtotal</h3>
             </div>
-                
+                <hr />
                {cart_product.map(function(item){
                     return(
                         <>
@@ -80,28 +82,28 @@ function cart({cart, recent_cart}){
                
             <div className="flex py-2 justify-between px-2">
                 <div className="flex gap-2">
-                    <input className="border border-gray-200 py-1 px-2" type="text" placeholder="Coupon Code"></input>
-                    <button className="border rounded-md bg-red-500 px-6 text-white">Apply Coupon</button>
+                    <SelfModifiedInput extraClasses="py-1 px-2 border rounded-md" labelClasses="sr-only" label="Coupon" id="Coupon" type="text" placeholder="Coupon Code" />
+                    <NormalButton name="Apply Coupon" />
                 </div>
                 <button onClick={handle_cart} className="border rounded-md bg-red-500 px-6 text-white">Update Cart</button>
             </div>
         </div>
-        <div className="border self-end sm:mx-8 flex flex-col gap-4 min-w-80 max-w-96 px-4 py-2">
-            <h1 className="px-2 py-2 bold text-xl bg-gray-100">Cart totals</h1>
-            
+        <div className="border self-end sm:mx-8 flex flex-col gap-3 min-w-80 max-w-96  pb-2 bg-white">
+            <h1 className="px-2 pt-2 bold text-xl">Cart totals</h1>
+            <hr />
             <div className="flex flex-col gap-2">
             <div className="px-2 flex gap-16">
                 <h2>Subtotal</h2>
-                <h2>${totalCount}</h2>
+                <h2>${totalCount.toFixed(2)}</h2>
             </div>
             <hr />
             <div className="px-2 flex gap-16">
                 <h2>Total</h2>
-                <h2>${totalCount}</h2>
+                <h2>${totalCount.toFixed(2)}</h2>
             </div>
             <hr />
             </div>
-            <button className="border rounded-md bg-red-500 text-white px-4 py-2">Proceed To Checkout</button>
+            <NormalButton name="Proceed To Checkout" extraclasses="mx-2 py-2"/>
         </div>
         </div>
     )

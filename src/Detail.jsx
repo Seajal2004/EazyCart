@@ -4,7 +4,8 @@ import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos} from "react-icons/md";
 import { getProduct } from './api';
 import { ImSpinner6 } from "react-icons/im"; 
 import Error from './Error';
-
+import SelfModifiedInput from './selfModifiedInput';
+import AddToCart from './AddToCart';
 function Detail({handleCart}) {
     const param = useParams();
     const id = param.id;
@@ -19,9 +20,6 @@ function Detail({handleCart}) {
       else{
       setCount(+event.target.value);
       }
-    }
-    function changeCart(){
-      handleCart(id,count);
     }
     useEffect(function(){
       const p = getProduct(id);
@@ -52,15 +50,15 @@ function Detail({handleCart}) {
     <Link className=' mx-2 flex  self-start px-2 h-7' to="/">
     <MdOutlineArrowBackIos className='text-2xl font-bold'/> Back
     </Link>
-    <div className='flex flex-col sm:flex-row gap-4'>
-    <img className="self-center w-6/12 max-h-96" src={product.images[0]} alt={"product "+ id}/>
-    <div className="items-center sm:self-center mx-4 flex flex-col gap-3">
+    <div className='flex flex-col sm:flex-row gap-4 sm:justify-center sm:gap-20'>
+    <img className="self-center w-1/4 max-h-96" src={product.images[0]} alt={"product "+ id}/>
+    <div className="sm:self-center mx-4 flex flex-col gap-3 max-w-2xl">
       <h1 className="text-4xl font-bold text-gray-500">{product.title}</h1>
       <h3 className="text-3xl font-bold text-gray-500 my-5">${product.price}</h3>
       <p className="text-gray-400 mb-5">{product.description}</p>
       <div className="flex flex-wrap gap-3">
-      <input onChange={setCart} type="number" value={count} className="border rounded-md border-gray-400 max-h-12 w-12 px-2 py-1" />
-      <button onClick={changeCart} className="rounded-md border bg-red-500 py-2 px-12 text-white">Add To Cart</button>
+      <SelfModifiedInput onChange={setCart} type="number" value={count} id="quantity" label="Quantity" name="quantity" labelClasses="sr-only" extraClasses="border rounded-md py-2 px-1 max-w-16"/>
+      <AddToCart id={id} count={count}/>
       </div>
       </div>
       </div>

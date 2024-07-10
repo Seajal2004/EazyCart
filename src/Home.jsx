@@ -3,6 +3,7 @@ import Products from './Products.jsx';
 import NoMatch from './NoMatch.jsx';
 import getData from './api.js';
 import { ImSpinner6 } from "react-icons/im";
+import SelfModifiedInput from './selfModifiedInput.jsx';
 function Home(){
     const [ProductList,setLists] = useState([]);
     useEffect(function(){
@@ -65,7 +66,7 @@ if(ProductList.length==0){
         <div id="main" className="bg-gray-200">
         <div className="flex flex-col gap-5 my-10 sm:mx-16 bg-white sm:px-16 py-16">
           <div className="flex justify-between">
-            <input className="border px-2 py-1" type="text" placeholder="Filter By category or title" onChange={Filtered}/>
+            <SelfModifiedInput type="text" label="Filter" labelClasses="sr-only" id="filter"  extraClasses="border py-1 rounded-md border-gray-500 px-2 max-w-60" placeholder="Filter By category or title" onChange={Filtered}/>
           <select onChange={sortMethod} value={srt}>
             <option>Default</option>
             <option>Low to heigh Price</option>

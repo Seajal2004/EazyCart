@@ -3,7 +3,9 @@ import { Form, Formik, useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { MdOutlineArrowBackIos} from "react-icons/md";
 import * as Yup from "yup";
-import Input from "./Input";
+
+import { FormikInput } from "./Input";
+import Button from "./FormButton";
 function login_page(){
     function sendData(){
         console.log(email.value,password.value)
@@ -29,10 +31,10 @@ function login_page(){
             onSubmit={sendData}
             >
             <Form className="flex flex-col gap-1">
-                <Input name="email" id="email" type="email" label="Email" />
+                <FormikInput name="email" id="email" type="email" label="Email" />
                 <Link className="text-blue-600 self-end" to="/forgot">Forget Password</Link>
-                <Input name="password" id="password" type="password" label="Passwrod" />
-                <button type="submit" className="my-6 border rounded-md bg-blue-600 text-white text-xl py-2 disabled:bg-blue-300">Log in</button>
+                <FormikInput name="password" id="password" type="password" label="Passwrod" />
+                <Button name="Log In" />
                 <p className="self-center">New User?Create Acccount <Link className="text-blue-600" to="/sign_up">Sign up</Link></p>
             </Form>
             </Formik>

@@ -10,6 +10,7 @@ import Logo from "./images/Q.png"
 import Login from "./login_page.jsx"
 import SignUp from "./sign_up.jsx"
 import Forgot from "./forgot.jsx"
+export const CreateContext = React.createContext();
 function App() {
   const savedData = localStorage.getItem("added-item") || "{}";
   const convertData = JSON.parse(savedData);
@@ -31,10 +32,11 @@ function App() {
 },[cart])
   return (
     <div className="flex flex-col h-screen justify-between">
+      <CreateContext.Provider value={addToCart}>
       <Header count={totalCount} src={Logo}/>
       <Routes>
       <Route index element= {<Home />}></Route>
-      <Route path="/product/:id" element={<Detail handleCart={addToCart}/>}></Route>
+      <Route path="/product/:id" element={<Detail />}></Route>
       <Route path="*" element={<Error2 />}></Route>
       <Route path="/my_cart" element={<Cart cart = {cart} recent_cart={updateCart}/>}></Route>
       <Route path="/login" element={<Login />}></Route>
@@ -42,6 +44,7 @@ function App() {
       <Route path="/forgot" element={<Forgot />}></Route>
       </Routes>
       <Footer />
+      </CreateContext.Provider>
     </div>
   );
 }
