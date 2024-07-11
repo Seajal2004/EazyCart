@@ -25,7 +25,23 @@ function sign_up(){
         username: Yup.string().required("Please enter your name"),
         dateOfBirth: Yup.string().required("Please enter your date-of-birth"),
         email : Yup.string().required("Please fill your email"),
-        password: Yup.string().required("Please Enter password").min(8,"password must be 8 chracters"),
+        password: Yup.string().required("Please Enter password").min(8,"password must be 8 chracters").test("numberPresnt","Password Contain some Number and Special Characters",(value)=>{
+            let nm1 = 0;
+            let nm2 = 0;
+            for(let i=0;i<value.length;i++){
+                if(value.charAt(i)>='0' && value.charAt(i)<='9'){
+                    nm1 += 1;
+                }
+                if(value.charAt(i)=='@' || value.charAt(i)=='#' || value.charAt(i)=="$"){
+                    nm2 += 1;
+                }
+
+            }
+            if(nm1==0 || nm2==0){
+                return false;
+            }
+            return true;
+    }),
         confirm_password : Yup.string().required("Please confirm your pssword")
 
 

@@ -12,7 +12,7 @@ function Product(data){
       <h1 className="text-xl ml-2">{data.name}</h1>
       <h2 className="text-gray-800 ml-2">Rating: {data.rate}/5</h2>
       <h2 className="text-gray-800 ml-2">Price: ${data.price}</h2>
-      <NormalButton name={<Link  to={'/product/'+ data.id}>Veiw</Link>} extraclasses="bg-orange-600  self-start ml-2" />
+      <Link  to={'/product/'+ data.id}>{<NormalButton name="Veiw" extraclasses="bg-orange-600  self-start"/>}</Link>
       </div>
     </div>
   );

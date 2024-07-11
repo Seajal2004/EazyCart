@@ -18,7 +18,7 @@ function cart({cart, recent_cart}){
             <div className="flex flex-col gap-6 mx-auto">
             <h1 className="bold text-3xl">Your Cart Is Empty</h1>
             <div className="flex justify-center">
-            <Link className="border rounded-md bg-orange-500 text-white px-4 py-1" to="/">Home</Link>
+            <Link to="/">{<NormalButton name="Home" />}</Link>
             </div>
             </div>
         )
@@ -63,7 +63,7 @@ function cart({cart, recent_cart}){
    }
     return(
         <div className="flex flex-col gap-4 bg-gray-100 h-screen justify-center">
-        <NormalButton name={<Link to="/">Home</Link>} extraclasses="self-center bg-orange-600" />
+        <Link to="/" className="self-center">{<NormalButton name="Home" extraclasses="bg-orange-600" />}</Link>
         <div className="mx-8 border border-gray-200 flex sm:flex-col bg-white">
             <div className="flex flex-col gap-4 sm:flex-row py-2 px-16  sm:justify-between">
                 <h3 className="bold text-2xl">Name</h3>
@@ -103,7 +103,7 @@ function cart({cart, recent_cart}){
             </div>
             <hr />
             </div>
-            <NormalButton name="Proceed To Checkout" extraclasses="mx-2 py-2"/>
+            <NormalButton name="Proceed To Checkout"/>
         </div>
         </div>
     )
