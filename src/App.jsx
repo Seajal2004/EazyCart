@@ -4,7 +4,7 @@ import Footer from './Footer.jsx';
 import Header from './Header.jsx';
 import Home from './Home.jsx';
 import Detail from './Detail.jsx';
-import {Error2} from './Error.jsx';
+import Error from './Error.jsx';
 import Cart from './cart.jsx';
 import Logo from "./images/Q.png"
 import Login from "./login_page.jsx"
@@ -37,7 +37,7 @@ function App() {
       <Routes>
       <Route index element= {<Home />}></Route>
       <Route path="/product/:id" element={<Detail />}></Route>
-      <Route path="*" element={<Error2 />}></Route>
+      <Route path="*" element={<Error name="Page"/>}></Route>
       <Route path="/my_cart" element={<Cart cart = {cart} recent_cart={updateCart}/>}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/sign_up" element={<SignUp />}></Route>

@@ -42,7 +42,7 @@ function Detail({handleCart}) {
     }
     if(!product){
       return (
-          <Error />
+          <Error name="Product" />
       )
     }
     return(

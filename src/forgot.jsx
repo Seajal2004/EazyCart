@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { MdOutlineArrowBackIos} from "react-icons/md";
 import * as Yup from "yup";
 import { FormikInput } from "./Input";
-import Button from "./FormButton";
+import NormalButton from "./NormalButton";
+import FormButton from "./FormButton";
 function forgot(){
     function sendData(){
         console.log(email.value)
@@ -30,8 +31,8 @@ function forgot(){
             >
             <Form className="flex flex-col gap-1">
                 <FormikInput name="email" id="email" type="email" label="Email" />
-                <Button name="Send Password"/>
-                <Link className="self-center" to="/login"><button className="border rounded-md bg-blue-600 text-white px-4 py-1 text-xl">Cancel</button></Link>
+                <FormButton name="Send Password"/>
+                <Link className="self-center" to="/login"><NormalButton name="Cancel" /></Link>
             </Form>
             </Formik>
 
