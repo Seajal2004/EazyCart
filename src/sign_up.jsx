@@ -8,7 +8,7 @@ import { SelfFormikInput } from "./selfModifiedInput";
 import Button from "./FormButton";
 function sign_up(){
     const [pass,setpass] = useState(false)
-    const [account_created,setAccount] = useState(false)
+    const [account_created,setAccount] = useState(fals)
     function createAccount(){
         if(password.value!=confirm_password.value){
             setpass(true);
