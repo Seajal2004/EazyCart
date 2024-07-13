@@ -1,7 +1,7 @@
 import React, {memo} from "react";
 import { RxCrossCircled } from "react-icons/rx";
 import SelfModifiedInput from "./selfModifiedInput";
-function cart_product_detail({cart,quantity, dummy_change,dummy_quan}){
+function cart_product_detail({cart,quantity,dummy_quan}){
     function changeQuantity(event){
         if(+event.target.value<0){
             dummy_quan(cart.id,0);
@@ -12,7 +12,7 @@ function cart_product_detail({cart,quantity, dummy_change,dummy_quan}){
 
     }
     function setdata(){
-        dummy_change(cart.id);
+        dummy_quan(cart.id,0);
     }
     return(
        <>

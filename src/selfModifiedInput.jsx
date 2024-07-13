@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import FormikHOC from "./FormikHOC";
+
 function SelfModifiedInput({label, name, type,id,touched,error,labelClasses,extraClasses,...rest}){
     return(
         <>
@@ -9,5 +9,4 @@ function SelfModifiedInput({label, name, type,id,touched,error,labelClasses,extr
         </>
     )
 }
-export const SelfFormikInput = FormikHOC(SelfModifiedInput);
 export default memo(SelfModifiedInput);
