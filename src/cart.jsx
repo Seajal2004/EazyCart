@@ -12,47 +12,23 @@ function cart({cart, recent_cart}){
     const totalCount =  cart_product.reduce(function(previous,current){
         return previous + current.price*dummy_cart[current.id];
     },0)
-       
-    if(keys_array.length==0){
-        return (
-            <div className="flex flex-col gap-6 mx-auto">
-            <h1 className="bold text-3xl">Your Cart Is Empty</h1>
-            <div className="flex justify-center">
-            <Link to="/">{<NormalButton name="Home" />}</Link>
-            </div>
-            </div>
-        )
-    }
-    const allPromise = keys_array.map(function(id){
-        return getProduct(id);
-    })
-    const allPromises = Promise.all(allPromise);
     useEffect(function(){
+        const allPromise = keys_array.map(function(id){
+            return getProduct(id);
+        })
+        const allPromises = Promise.all(allPromise);
         allPromises.then(function(product){
             setCart(product)
     
     })
-   },[keys_array])
-   if(cart_product.length==0){
-    return (
-        <div className='self-center flex flex-col gap-3'>
-          <ImSpinner6 className='text-6xl animate-spin'/>
-          <h1 className="text-2xl relative right-8">Please Wait...</h1>
-        </div>
-    )
-   }
+   },[cart_product])
+   
    function handle_count(id,dummy_count){
     const d = {...dummy_cart};
     d[id] = dummy_count;
     set_dummy(d);
    }
-   function dummy(id){
-    const d = {...dummy_cart};
-    d[id] = 0;
-    set_dummy(d);
-   }
    function handle_cart(){
-   
     const m = {...dummy_cart};
     for(let i=0;i<keys_array.length;i++){
         if(m[keys_array[i]]==0){
@@ -61,6 +37,14 @@ function cart({cart, recent_cart}){
     }
     recent_cart(m);
    }
+   if(keys_array.length==0){
+    return (
+        <div className="flex flex-col gap-6 items-center">
+        <h1 className="bold text-3xl">Your Cart Is Empty</h1>
+        <Link to="/">{<NormalButton name="Home" />}</Link>
+        </div>
+    )
+}
     return(
         <div className="flex flex-col gap-4 bg-gray-100 h-screen justify-center">
         <Link to="/" className="self-center">{<NormalButton name="Home" extraclasses="bg-orange-600" />}</Link>
@@ -72,10 +56,11 @@ function cart({cart, recent_cart}){
                 <h3 className="bold text-2xl">Subtotal</h3>
             </div>
                 <hr />
-               {cart_product.map(function(item){
+                {cart_product.length==0 && <ImSpinner6 className="text-5xl mx-auto animate-spin"/>}
+               {cart_product.length>0 && cart_product.map(function(item){
                     return(
                         <>
-                        <Cart cart={item} quantity={dummy_cart[item.id]} dummy_change={dummy} dummy_quan={handle_count}/>
+                        <Cart cart={item} quantity={dummy_cart[item.id]} dummy_quan={handle_count}/>
                         </>
                     )
                 })}
@@ -106,6 +91,7 @@ function cart({cart, recent_cart}){
             <NormalButton name="Proceed To Checkout"/>
         </div>
         </div>
+        
     )
 }
 export default cart;
