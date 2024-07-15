@@ -51,7 +51,7 @@ function cart({cart, recent_cart}){
         <div className="w-[90%] self-center border rounded-md flex flex-col gap-4 bg-white py-12 px-12 h-[90%]">
         
         <div className="border border-gray-200 rounded-md flex flex-col bg-white">
-            <div className="flex pl-[248px] py-2  pr-12 gap-12 bg-gray-200">
+            <div className="flex pl-[248px] py-2  gap-12 bg-gray-200">
                 <h3 className="bold text-xl grow">Name</h3>
                 <h3 className="bold text-xl w-20">Price</h3>
                 <h3 className="bold text-xl w-20">Quantity</h3>
