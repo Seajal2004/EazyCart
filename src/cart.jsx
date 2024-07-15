@@ -46,14 +46,16 @@ function cart({cart, recent_cart}){
     )
 }
     return(
-        <div className="flex flex-col gap-4 bg-gray-100 h-screen justify-center">
-        <Link to="/" className="self-center">{<NormalButton name="Home" extraclasses="bg-orange-600" />}</Link>
-        <div className="mx-8 border border-gray-200 flex sm:flex-col bg-white">
-            <div className="flex flex-col gap-4 sm:flex-row py-2 px-16  sm:justify-between">
-                <h3 className="bold text-2xl">Name</h3>
-                <h3 className="bold text-2xl">Price</h3>
-                <h3 className="bold text-2xl">Quantity</h3>
-                <h3 className="bold text-2xl">Subtotal</h3>
+        <div className="flex flex-col gap-8 bg-gray-100 py-8 justify-center grow">
+            <Link to="/" className="self-center">{<NormalButton name="Home" extraclasses="bg-orange-600" />}</Link>
+        <div className="w-[90%] self-center border rounded-md flex flex-col gap-4 bg-white py-12 px-12 h-[90%]">
+        
+        <div className="border border-gray-200 rounded-md flex flex-col bg-white">
+            <div className="flex pl-[248px] py-2  pr-12 gap-12 bg-gray-200">
+                <h3 className="bold text-xl grow">Name</h3>
+                <h3 className="bold text-xl w-20">Price</h3>
+                <h3 className="bold text-xl w-20">Quantity</h3>
+                <h3 className="bold text-xl w-20">Subtotal</h3>
             </div>
                 <hr />
                 {cart_product.length==0 && <ImSpinner6 className="text-5xl mx-auto animate-spin"/>}
@@ -64,7 +66,6 @@ function cart({cart, recent_cart}){
                         </>
                     )
                 })}
-               
             <div className="flex py-2 justify-between px-2">
                 <div className="flex gap-2">
                     <SelfModifiedInput extraClasses="py-1 px-2 border rounded-md" labelClasses="sr-only" label="Coupon" id="Coupon" type="text" placeholder="Coupon Code" />
@@ -73,7 +74,7 @@ function cart({cart, recent_cart}){
                 <button onClick={handle_cart} className="border rounded-md bg-red-500 px-6 text-white">Update Cart</button>
             </div>
         </div>
-        <div className="border self-end sm:mx-8 flex flex-col gap-3 min-w-80 max-w-96  pb-2 bg-white">
+        <div className="border self-end  flex flex-col gap-3 min-w-80 max-w-96  pb-2 bg-white">
             <h1 className="px-2 pt-2 bold text-xl">Cart totals</h1>
             <hr />
             <div className="flex flex-col gap-2">
@@ -89,6 +90,7 @@ function cart({cart, recent_cart}){
             <hr />
             </div>
             <NormalButton name="Proceed To Checkout"/>
+        </div>
         </div>
         </div>
         

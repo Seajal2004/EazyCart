@@ -16,13 +16,13 @@ function cart_product_detail({cart,quantity,dummy_quan}){
     }
     return(
        <>
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-evenly mr-4 sm:mr-0 sm:py-2"> 
-            <button onClick={setdata}><RxCrossCircled className="self-center"/></button>
-            <img className="border max-w-16 max-h-16" src={cart.images[0]} />
-            <h2 className="self-center bold text-xl text-orange-600">{cart.title}</h2>
-            <h2 className="self-center bold text-xl">{cart.price.toFixed(2)}</h2>
-            <SelfModifiedInput extraClasses="self-center max-w-12 py-1 px-1 border rounded-md bg-gray-50" onChange={changeQuantity} value={quantity} type="number" label="Quantity" labelClasses="sr-only" />
-            <h2 className="self-center">${(cart.price*quantity).toFixed(2)}</h2>
+        <div className="flex gap-12 items-center mx-12"> 
+            <button onClick={setdata}><RxCrossCircled className="w-10"/></button>
+            <img className="border w-16 h-16" src={cart.images[0]} />
+            <h2 className="grow bold text-xl text-orange-600">{cart.title}</h2>
+            <h2 className="w-20 bold text-xl">${cart.price.toFixed(2)}</h2>
+            <input className="w-20 py-1 px-1 border rounded-md bg-gray-50" onChange={changeQuantity} value={quantity} type="number" />
+            <h2 className=" bold text-xl w-20">${(cart.price*quantity).toFixed(2)}</h2>
         </div>
         <hr className=""/>
         </>
