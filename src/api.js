@@ -12,4 +12,5 @@ export function getData(){
     });
 
 }
+
 export default getData;
