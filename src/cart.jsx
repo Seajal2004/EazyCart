@@ -1,11 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link} from 'react-router-dom';
 import Cart from "./cart_product_detail";
 import { getProduct } from "./api";
 import { ImSpinner6 } from "react-icons/im";
 import SelfModifiedInput from "./selfModifiedInput";
 import NormalButton from "./NormalButton";
+import { Navigate } from 'react-router-dom';
+import { CreateUser } from "./App";
 function cart({cart, recent_cart}){
+    const user = useContext(CreateUser);
+    if(!user){
+        return <Navigate to="/login" />
+    }
     const [cart_product,setCart] = useState([]);
     const [dummy_cart,set_dummy] = useState(cart);
     const keys_array = Object.keys(dummy_cart);

@@ -1,10 +1,16 @@
-import React, { useEffect, useState, useMemo,useCallback} from 'react';
+import React, { useEffect, useState, useMemo,useCallback, useContext} from 'react';
 import Products from './Products.jsx';
 import NoMatch from './NoMatch.jsx';
 import getData from './api.js';
 import { ImSpinner6 } from "react-icons/im";
 import SelfModifiedInput from './selfModifiedInput.jsx';
+import { Navigate } from 'react-router-dom';
+import { CreateUser } from './App.jsx';
 function Home(){
+  const user = useContext(CreateUser);
+    if(!user){
+        return <Navigate to="/login" />
+    }
     const [ProductList,setLists] = useState([]);
     useEffect(function(){
 

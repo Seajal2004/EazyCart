@@ -1,12 +1,18 @@
-import React, { useEffect, useState,useMemo,useCallback } from 'react';
+import React, { useEffect, useState,useMemo,useCallback,useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos} from "react-icons/md";
 import { getProduct } from './api';
 import { ImSpinner6 } from "react-icons/im"; 
 import Error from './Error';
 import SelfModifiedInput from './selfModifiedInput';
+import { Navigate } from 'react-router-dom';
 import AddToCart from './AddToCart';
-function Detail({handleCart}) {
+import { CreateUser } from './App';
+function Detail() {
+  const user = useContext(CreateUser);
+    if(!user){
+        return <Navigate to="/login" />
+    }
     const param = useParams();
     const id = param.id;
     
