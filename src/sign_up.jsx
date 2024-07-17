@@ -6,12 +6,24 @@ import * as Yup from "yup";
 import Created from "./Created";
 import  SelfFormikInput  from "./selfModifiedInput";
 import Button from "./FormButton";
-function createAccount(values){     
-    console.log(values.username,values.dateOfBirth,values.email,values.password,values.confirm_password)
+import axios from "axios";
+function createAccount(values,props){     
+    axios.post("https://myeasykart.codeyogi.io/signup",
+        {
+            fullName: values.username,
+            email: values.email,
+            password: values.password,
+        }
+    ).then((response)=>{
+        const {user,token} = response.data;
+        localStorage.setItem("token",token);
+        props.props.setUser(user);
+    }).catch(()=>{
+        console.log("fgggg");
+    })
 }
 const schema = Yup.object().shape({
     username: Yup.string().required("Please enter your name"),
-    dateOfBirth: Yup.string().required("Please enter your date-of-birth"),
     email : Yup.string().required("Please fill your email"),
     password: Yup.string().required("Please Enter password").min(8,"password must be 8 chracters").test("numberPresnt","Password Contain some Number and Special Characters",(value)=>{
         let nm1 = 0;
@@ -53,7 +65,6 @@ function sign_up({handleSubmit,handleBlur,handleChange,touched,errors}){
             
             <form onSubmit={handleSubmit} className="flex flex-col gap-1">
                 <SelfFormikInput name="username" id="username" type="text" label="Name" onChange={handleChange} onBlur={handleBlur} touched={touched.username} error={errors.username} extraClasses="border rounded-md border-yellow-400 border-2 py-1 px-1" labelClasses="text-gray-900 text-lg" />
-                <SelfFormikInput name="dateOfBirth" id="dateOfBirth" type="date" label="Date Of Birth" onChange={handleChange} onBlur={handleBlur} touched={touched.dateOfBirth} error={errors.dateOfBirth} extraClasses="border rounded-md border-yellow-400 border-2 py-1 px-1" labelClasses="text-gray-900 text-lg" />
                 <SelfFormikInput name="email" id="email" type="email" label="Email" onChange={handleChange} onBlur={handleBlur} touched={touched.email} error={errors.email} extraClasses="border rounded-md border-yellow-400 border-2 py-1 px-1" labelClasses="text-gray-900 text-lg" />
                 <SelfFormikInput name="password" id="password" type="password" label="Password" onChange={handleChange} onBlur={handleBlur} touched={touched.password} error={errors.password} extraClasses="border rounded-md border-yellow-400 border-2 py-1 px-1" labelClasses="text-gray-900 text-lg"/>
                 <SelfFormikInput name="confirm_password" id="confirm_password" type="password" label="Confirm Password" onChange={handleChange} onBlur={handleBlur} touched={touched.confirm_password} error={errors.confirm_password} extraClasses="border rounded-md border-yellow-400 border-2 py-1 px-1" labelClasses="text-gray-900 text-lg" />
@@ -68,7 +79,7 @@ function sign_up({handleSubmit,handleBlur,handleChange,touched,errors}){
 const myHOC = withFormik({
     initialValues: {
         username: "",
-        dateOfBirth: "",
+
         email: "",
         password: "",
         confirm_password: "",

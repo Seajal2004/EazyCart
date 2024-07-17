@@ -73,7 +73,7 @@ function App() {
       <Route path="*" element={<Error name="Page"/>}></Route>
       <Route path="/my_cart" element={<Cart cart = {cart} recent_cart={updateCart}/>}></Route>
       <Route path="/login" element={<Login setUser={setUser} />}></Route>
-      <Route path="/sign_up" element={<SignUp />}></Route>
+      <Route path="/sign_up" element={<SignUp setUser={setUser} />}></Route>
       <Route path="/forgot" element={<Forgot />}></Route>
       </Routes>
       <Footer />
