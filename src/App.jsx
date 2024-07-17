@@ -18,6 +18,7 @@ function App() {
   const convertData = JSON.parse(savedData);
   const [cart,setCart] = useState(convertData);
   const [user,setUser] = useState();
+  const [loading,setLoading] = useState(true);
   const token = localStorage.getItem("token");
   useEffect(()=> {
     if(token){
@@ -27,9 +28,13 @@ function App() {
       }
     }).then((response)=>{
       setUser(response.data);
+      setLoading(false);
     }
     )
   }
+    else{
+      setLoading(false);
+    }
 },[])
   function logout(){
     localStorage.setItem("token","");
@@ -50,6 +55,13 @@ function App() {
     return previous + cart[current];
   },0))
 },[cart])
+  if(loading){
+    return(
+      <div className="flex flex-col items-center justify-center h-screen w-screnn">
+        <h1 className="text-5xl">Loading...</h1>
+      </div>
+    )
+  }
   return (
     <div className="flex flex-col h-screen justify-between">
       <CreateContext.Provider value={addToCart}>
