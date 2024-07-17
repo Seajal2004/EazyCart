@@ -6,8 +6,8 @@ import * as Yup from "yup";
 import Created from "./Created";
 import  SelfFormikInput  from "./selfModifiedInput";
 import Button from "./FormButton";
-function createAccount(){     
-    console.log(username.value,dateOfBirth.value,email.value,password.value,confirm_password.value)
+function createAccount(values){     
+    console.log(values.username,values.dateOfBirth,values.email,values.password,values.confirm_password)
 }
 const schema = Yup.object().shape({
     username: Yup.string().required("Please enter your name"),
