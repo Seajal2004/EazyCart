@@ -2,14 +2,10 @@ import React, { useState,useMemo, useCallback, useEffect} from 'react';
 import {Routes, Route} from "react-router-dom";
 import Footer from './Footer.jsx';
 import Header from './Header.jsx';
-import Home from './Home.jsx';
-import Detail from './Detail.jsx';
 import Error from './Error.jsx';
-import Cart from './cart.jsx';
 import Logo from "./images/Q.png"
-import Login from "./login_page.jsx"
-import SignUp from "./sign_up.jsx"
-import Forgot from "./forgot.jsx"
+import Home, {DetaiL,CarT} from "./NavigateLogin.jsx";
+import Login, {SignUP,ForgoT} from "./NavigateHome.jsx";
 import axios from 'axios';
 import Alert from './alert.jsx';
 export const CreateContext = React.createContext();
@@ -68,18 +64,18 @@ function App() {
   return (
     <div className="flex flex-col h-screen justify-between">
       <CreateContext.Provider value={addToCart}>
-      <CreateUser.Provider value={user}>
+      <CreateUser.Provider value={{user,setUser}}>
       <AlertContext.Provider value={{alert,setAlert}} >
       <Header count={totalCount} src={Logo} logout={logout}/>
        <Alert />
       <Routes>
       <Route index element= {<Home />}></Route>
-      <Route path="/product/:id" element={<Detail />}></Route>
+      <Route path="/product/:id" element={<DetaiL />}></Route>
       <Route path="*" element={<Error name="Page"/>}></Route>
-      <Route path="/my_cart" element={<Cart cart = {cart} recent_cart={updateCart}/>}></Route>
-      <Route path="/login" element={<Login setUser={setUser} setAlert={setAlert} />}></Route>
-      <Route path="/sign_up" element={<SignUp setUser={setUser} setAlert={setAlert}/>}></Route>
-      <Route path="/forgot" element={<Forgot />}></Route>
+      <Route path="/my_cart" element={<CarT cart = {cart} recent_cart={updateCart}/>}></Route>
+      <Route path="/login" element={<Login />}></Route>
+      <Route path="/sign_up" element={<SignUP/>}></Route>
+      <Route path="/forgot" element={<ForgoT />}></Route>
       </Routes>
       <Footer />
       </AlertContext.Provider>

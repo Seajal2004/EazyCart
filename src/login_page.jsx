@@ -1,11 +1,10 @@
-import React, {useContext} from "react";
+import React from "react";
 import { withFormik } from "formik";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import Input from "./Input";
 import Button from "./FormButton";
 import axios from "axios";
-import { AlertContext, CreateUser } from "./App";
 function sendData(values,props){
     axios.post("https://myeasykart.codeyogi.io/login",{
         email: values.email,
@@ -14,6 +13,8 @@ function sendData(values,props){
         const {user,token} = response.data;
         localStorage.setItem("token",token);
         props.props.setUser(user);
+        console.log(user);
+        props.props.setAlert({type:"success" ,message:"Welcome Back "+ user.full_name + "!"});
 
     }).catch(()=>{
         props.props.setAlert({type:"error",message:"Invalid email address or Password"})
@@ -24,10 +25,6 @@ const schema = Yup.object().shape({
     password : Yup.string().required("Please enter your password"),
 })
 function login_page({touched,errors,handleChange,handleBlur,handleSubmit}){
-    const user = useContext(CreateUser);
-    if(user){
-        return <Navigate to="/" />
-    }
     return (
         <div className="flex  bg-gray-100 h-screen w-screen">
         <div className="flex flex-col px-4 py-2 gap-4 self-center mx-auto w-2/4 bg-white border rounded-xl">

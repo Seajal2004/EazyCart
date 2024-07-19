@@ -10,7 +10,7 @@ function Alert(){
         if(alert){
             const timeout = setTimeout(()=>{
                 setAlert();
-            },5*1000)
+            },3*1000)
             return ()=>clearTimeout(timeout);
         }
     },[alert])
