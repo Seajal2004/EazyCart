@@ -19,7 +19,7 @@ function createAccount(values,props){
         localStorage.setItem("token",token);
         props.props.setUser(user);
     }).catch(()=>{
-        console.log("fgggg");
+        props.props.setAlert({type:"error",message:"Email is already exist!"})
     })
 }
 const schema = Yup.object().shape({

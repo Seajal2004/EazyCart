@@ -6,8 +6,8 @@ import * as Yup from "yup";
 import Input from "./Input";
 import NormalButton from "./NormalButton";
 import FormButton from "./FormButton";
-function sendData(){
-    console.log(email.value)
+function sendData(values){
+    console.log(values.email)
 }
 const schema = Yup.object().shape({
     email : Yup.string().required("Please fill your email"),

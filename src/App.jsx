@@ -11,14 +11,17 @@ import Login from "./login_page.jsx"
 import SignUp from "./sign_up.jsx"
 import Forgot from "./forgot.jsx"
 import axios from 'axios';
+import Alert from './alert.jsx';
 export const CreateContext = React.createContext();
 export const CreateUser = React.createContext();
+export const AlertContext = React.createContext();
 function App() {
   const savedData = localStorage.getItem("added-item") || "{}";
   const convertData = JSON.parse(savedData);
   const [cart,setCart] = useState(convertData);
   const [user,setUser] = useState();
   const [loading,setLoading] = useState(true);
+  const [alert,setAlert] = useState();
   const token = localStorage.getItem("token");
   useEffect(()=> {
     if(token){
@@ -66,17 +69,20 @@ function App() {
     <div className="flex flex-col h-screen justify-between">
       <CreateContext.Provider value={addToCart}>
       <CreateUser.Provider value={user}>
+      <AlertContext.Provider value={{alert,setAlert}} >
       <Header count={totalCount} src={Logo} logout={logout}/>
+       <Alert />
       <Routes>
       <Route index element= {<Home />}></Route>
       <Route path="/product/:id" element={<Detail />}></Route>
       <Route path="*" element={<Error name="Page"/>}></Route>
       <Route path="/my_cart" element={<Cart cart = {cart} recent_cart={updateCart}/>}></Route>
-      <Route path="/login" element={<Login setUser={setUser} />}></Route>
-      <Route path="/sign_up" element={<SignUp setUser={setUser} />}></Route>
+      <Route path="/login" element={<Login setUser={setUser} setAlert={setAlert} />}></Route>
+      <Route path="/sign_up" element={<SignUp setUser={setUser} setAlert={setAlert}/>}></Route>
       <Route path="/forgot" element={<Forgot />}></Route>
       </Routes>
       <Footer />
+      </AlertContext.Provider>
       </CreateUser.Provider>
       </CreateContext.Provider>
     </div>

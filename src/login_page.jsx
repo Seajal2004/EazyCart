@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import Input from "./Input";
 import Button from "./FormButton";
 import axios from "axios";
-import { CreateUser } from "./App";
+import { AlertContext, CreateUser } from "./App";
 function sendData(values,props){
     axios.post("https://myeasykart.codeyogi.io/login",{
         email: values.email,
@@ -16,7 +16,7 @@ function sendData(values,props){
         props.props.setUser(user);
 
     }).catch(()=>{
-        console.log("Invalid User!")
+        props.props.setAlert({type:"error",message:"Invalid email address or Password"})
     })
 }
 const schema = Yup.object().shape({
