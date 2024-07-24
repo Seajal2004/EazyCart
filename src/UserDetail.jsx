@@ -1,11 +1,10 @@
-import React from "react";
-function UserDetail(){
+import React, {useState, useEffect} from "react";
+import { CreateUser } from "./App";
+import axios from "axios";
+function UserDetail({children}){
     const [user,setUser] = useState();
     const [loading,setLoading] = useState(true);
-    function logout(){
-        localStorage.setItem("token","");
-        setUser();
-      }
+      const token = localStorage.getItem("token");
       useEffect(()=> {
         if(token){
         axios.get("https://myeasykart.codeyogi.io/me",{
@@ -22,10 +21,17 @@ function UserDetail(){
           setLoading(false);
         }
     },[])
+    if(loading){
+        return(
+          <div className="flex flex-col items-center justify-center h-screen w-screnn">
+            <h1 className="text-5xl">Loading...</h1>
+          </div>
+        )
+      }
     return (
-        <attribute>
-          
-        </attribute>
+        <CreateUser.Provider value={{user,setUser}}>
+          {children}
+        </CreateUser.Provider>
     )
 }
 export default UserDetail;
