@@ -15,7 +15,7 @@ function Alert(){
         }
     },[alert])
    if(!alert){
-    return;
+    return
    }
    if(alert.type=="error"){
     Icon = MdOutlineDangerous;

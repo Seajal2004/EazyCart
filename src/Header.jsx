@@ -4,7 +4,7 @@ import { GrShop } from "react-icons/gr";
 import { Link } from 'react-router-dom';
 import { IoPersonOutline } from "react-icons/io5";
 function Header({count,src,logout}){
-    const user = useContext(CreateUser);
+    const {user} = useContext(CreateUser);
     let logoutClass = "";
     let loginClass = "hidden";
     if(!user){
