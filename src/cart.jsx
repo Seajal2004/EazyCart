@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link} from 'react-router-dom';
 import Cart from "./cart_product_detail";
 import { getProduct } from "./api";
 import { ImSpinner6 } from "react-icons/im";
 import SelfModifiedInput from "./selfModifiedInput";
 import NormalButton from "./NormalButton";
-function cart({cart, recent_cart}){
+import { CreateContext } from "./App";
+function cart(){
+    const {cart,updateCart} = useContext(CreateContext);
     const [cart_product,setCart] = useState([]);
     const [dummy_cart,set_dummy] = useState(cart);
     const keys_array = Object.keys(dummy_cart);
@@ -35,7 +37,7 @@ function cart({cart, recent_cart}){
             delete m[keys_array[i]];
         }
     }
-    recent_cart(m);
+    updateCart(m);
    }
    if(keys_array.length==0){
     return (
