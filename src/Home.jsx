@@ -6,49 +6,38 @@ import { ImSpinner6 } from "react-icons/im";
 import SelfModifiedInput from './selfModifiedInput.jsx';
 
 function Home(){
-    const [ProductList,setLists] = useState([]);
-    useEffect(function(){
-
-        let prlist = getData();
-        prlist.then(function(products){
-            setLists(products);
-        });
-
-    },[]);
+    const [ProductList,setLists] = useState({meta: {},data: []});
     const [srt ,setsrt] = useState("Default");
-  const [flt ,setflt] = useState("");
-let data = [...ProductList];
-useMemo(function(){
-  if(flt!=""){
-  data  = data.filter(function(item) {
-  const categ = item.category.toLowerCase();
-  const nme = item.title.toLowerCase();
-  const filt = flt.toLowerCase();
-  return categ.indexOf(filt) != -1 || nme.indexOf(filt) != -1;
-})
-}},[flt,data])
-  useMemo(function(){
-   if(srt == "Low to heigh Price"){
-     data.sort(function(x,y) {
-       return x.price -y.price;
-     })
-   }
-   if(srt == 'Heigh to low Price'){
-     data.sort(function(x,y) {
-       return y.price -x.price;
-     })
-   }
-   if(srt == 'Rating'){
-    data.sort(function(x,y) {
-      return y.rating -x.rating;
-    })
-  }
-   if(srt == 'Category'){
-    data.sort(function(x,y) {
-      return y.category>x.category?-1:1;
-    })
-  }
-},[srt,data]);
+  const [flt ,setflt] = useState();
+  const [page,setPage] = useState(1);
+  useEffect(function(){
+    let sortBy;
+    let search;
+    let sortType;
+    if(flt){
+      search = flt;
+    }
+      if(srt=="Low To Heigh Price"){
+        sortBy = "price";
+      }
+      if(srt=="Heigh To Low Price"){
+        sortBy = "price";
+        sortType = "desc";
+      }
+      else if(srt=="Category"){
+        sortBy = "category";
+      }
+      else if(srt=="Rating"){
+        sortBy = "rating";
+        sortType = "desc"
+      }
+      let prlist = getData(sortBy,search,sortType,page);
+      prlist.then(function(products){
+          setLists(products);
+      });
+
+  },[srt,flt,page]);
+let data = [...ProductList.data];
 const sortMethod = useCallback(function(event){
   setsrt(event.target.value);
 },[srt])
@@ -70,8 +59,8 @@ if(ProductList.length==0){
             <SelfModifiedInput type="text" label="Filter" labelClasses="sr-only" id="filter"  extraClasses="border py-1 rounded-md border-gray-500 px-2 max-w-60" placeholder="Filter By category or title" onChange={Filtered}/>
           <select onChange={sortMethod} value={srt}>
             <option>Default</option>
-            <option>Low to heigh Price</option>
-            <option>Heigh to low Price</option>
+            <option>Low To Heigh Price</option>
+            <option>Heigh To Low Price</option>
             <option>Category</option>
             <option>Rating</option>
           </select>
@@ -80,10 +69,10 @@ if(ProductList.length==0){
             {data.length>0 && <Products items={data} />}
             {data.length==0 && <NoMatch />}
           </div>
+          
           <div className="flex gap-2">
-            <a className="px-2  border text-red-500 border-red-500 rounded-sm" href="">1</a>
-            <a className="px-2  border text-red-500 border-red-500 rounded-sm" href="">2</a>
-            <a className="px-2  border text-red-500 border-red-500 rounded-sm" href="">3</a>
+          {
+          [...Array(ProductList.meta.last_page).keys()].map((item)=><button onClick={()=>{setPage(item+1)}} key={item} className='border px-3 py-1 border-orange-500 text-orange-500'>{item+1}</button>)}
             </div>
         </div>
       </div>

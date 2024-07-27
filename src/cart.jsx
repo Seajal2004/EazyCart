@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link} from 'react-router-dom';
 import Cart from "./cart_product_detail";
-import { getProduct } from "./api";
+import { getProducts } from "./api";
 import { ImSpinner6 } from "react-icons/im";
 import SelfModifiedInput from "./selfModifiedInput";
 import NormalButton from "./NormalButton";
-import { CreateContext } from "./App";
+import { CreateContext } from "./CartProvider";
 function cart(){
     const {cart,updateCart} = useContext(CreateContext);
     const [cart_product,setCart] = useState([]);
@@ -15,13 +15,10 @@ function cart(){
         return previous + current.price*dummy_cart[current.id];
     },0)
     useEffect(function(){
-        const allPromise = keys_array.map(function(id){
-            return getProduct(id);
-        })
-        const allPromises = Promise.all(allPromise);
-        allPromises.then(function(product){
+        const joinIds = keys_array.join();
+        const Promise = getProducts(joinIds);
+        Promise.then(function(product){
             setCart(product)
-    
     })
    },[cart_product])
    
@@ -63,9 +60,9 @@ function cart(){
                 {cart_product.length==0 && <ImSpinner6 className="text-5xl mx-auto animate-spin"/>}
                {cart_product.length>0 && cart_product.map(function(item){
                     return(
-                        <>
-                        <Cart cart={item} quantity={dummy_cart[item.id]} dummy_quan={handle_count}/>
-                        </>
+                        <div key={item.id}>
+                        <Cart  cart={item} quantity={dummy_cart[item.id]} dummy_quan={handle_count}/>
+                        </div>
                     )
                 })}
             <div className="flex py-2 justify-between px-2">

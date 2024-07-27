@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { AlertContext, CreateUser } from "./App";
+import {  CreateUser } from "./UserDetail";
+import { AlertContext } from "./App";
 import { Navigate } from "react-router-dom";
 import  Login  from "./login_page";
 import  SignUp  from "./sign_up";

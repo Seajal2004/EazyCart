@@ -13,7 +13,6 @@ function sendData(values,props){
         const {user,token} = response.data;
         localStorage.setItem("token",token);
         props.props.setUser(user);
-        console.log(user);
         props.props.setAlert({type:"success" ,message:"Welcome Back "+ user.full_name + "!"});
 
     }).catch(()=>{

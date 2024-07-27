@@ -1,5 +1,5 @@
 import React, {useState,useCallback,useMemo} from "react";
-import { CreateContext } from "./App";
+export const CreateContext = React.createContext();
 function CartProvider({children}){
     const savedData = localStorage.getItem("added-item") || "{}";
     const convertData = JSON.parse(savedData);

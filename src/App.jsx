@@ -8,8 +8,6 @@ import Login, {SignUP,ForgoT} from "./NavigateHome.jsx";
 import Alert from './alert.jsx';
 import UserDetail from './UserDetail.jsx';
 import CartProvider from './CartProvider.jsx';
-export const CreateContext = React.createContext();
-export const CreateUser = React.createContext();
 export const AlertContext = React.createContext();
 function App() {
   const [alert,setAlert] = useState();

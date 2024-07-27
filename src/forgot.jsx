@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import Input from "./Input";
 import NormalButton from "./NormalButton";
 import FormButton from "./FormButton";
-import { CreateUser } from "./App";
+import { CreateUser } from "./UserDetail";
 function sendData(values){
     console.log(values.email)
 }

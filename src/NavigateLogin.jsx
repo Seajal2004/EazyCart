@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AlertContext, CreateUser } from "./App";
+import { CreateUser } from "./UserDetail";
 import { Navigate } from "react-router-dom";
 import  SignUp  from "./sign_up";
 import Forgot from "./forgot";

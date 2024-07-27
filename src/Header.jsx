@@ -1,5 +1,6 @@
 import React, {memo, useContext} from 'react';
-import { CreateContext, CreateUser } from './App';
+import { CreateContext } from './CartProvider';
+import {  CreateUser } from './UserDetail';
 import Logo from "./images/Q.png"
 import { GrShop } from "react-icons/gr";
 import { Link } from 'react-router-dom';
