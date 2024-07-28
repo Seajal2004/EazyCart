@@ -13,8 +13,8 @@ function App() {
   const [alert,setAlert] = useState();
   return (
     <div className="flex flex-col h-screen justify-between">
-      <CartProvider>
       <UserDetail>
+      <CartProvider>
       <AlertContext.Provider value={{alert,setAlert}} >
       <Header/>
        <Alert />
@@ -29,8 +29,8 @@ function App() {
       </Routes>
       <Footer />
       </AlertContext.Provider>
-      </UserDetail>
       </CartProvider>
+      </UserDetail>
     </div>
   );
 }

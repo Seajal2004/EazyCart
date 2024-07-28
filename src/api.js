@@ -33,5 +33,17 @@ export function getData(sortBy,search,sortType,page){
     });
 
 }
+export function setCart(cart){
+    return axios.post('https://myeasykart.codeyogi.io/carts',cart,{headers : {
+        Authorization: localStorage.getItem("token"),
+        }
+    })
+}
+export function getCart(){
+    return axios.get('https://myeasykart.codeyogi.io/carts',{headers : {
+        Authorization: localStorage.getItem("token"),
+        }
+    })
+}
 
 export default getData;

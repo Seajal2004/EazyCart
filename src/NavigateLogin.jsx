@@ -1,8 +1,5 @@
 import React, { useContext } from "react";
 import { CreateUser } from "./UserDetail";
-import { Navigate } from "react-router-dom";
-import  SignUp  from "./sign_up";
-import Forgot from "./forgot";
 import Home from "./Home";
 import Detail from "./Detail";
 import cart from "./cart";
