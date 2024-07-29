@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import { withFormik } from "formik";
 import { Link} from "react-router-dom";
+import { MdArrowBackIos } from "react-icons/md";
 import * as Yup from "yup";
 import  SelfFormikInput  from "./selfModifiedInput";
 import Button from "./FormButton";
 import axios from "axios";
-
+import { Navigate } from "react-router-dom";
+import { CreateUser } from "./UserDetail";
+let setUsers;
 function createAccount(values,props){     
     axios.post("https://myeasykart.codeyogi.io/signup",
         {
@@ -16,7 +19,7 @@ function createAccount(values,props){
     ).then((response)=>{
         const {user,token} = response.data;
         localStorage.setItem("token",token);
-        props.props.setUser(user);
+        setUsers(user);
         props.props.setAlert({type:"success",message:"Welcome "+ user.full_name +"!"})
     }).catch(()=>{
         props.props.setAlert({type:"error",message:"Email is already exist!"})
@@ -52,9 +55,15 @@ const schema = Yup.object().shape({
 
 })
 function sign_up({handleSubmit,handleBlur,handleChange,touched,errors}){
+    const {user,setUser} = useContext(CreateUser);
+    setUsers = setUser
+    if(user){
+        return <Navigate to="/" />
+    }
     return (
         <div className="flex  bg-gray-100 h-screen w-screen">
         <div className="my-4 flex flex-col px-4 py-2 gap-4 self-center mx-auto w-2/4 bg-white border rounded-xl">
+        <Link to="/" className="flex"><MdArrowBackIos className="text-xl self-center"/>Back</Link>
             <h1 className="self-center text-gray-600 text-3xl">EazyCarter</h1>
             <h2 className="text-2xl bold">Sign up</h2>
 

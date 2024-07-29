@@ -14,6 +14,10 @@ const schema = Yup.object().shape({
     email : Yup.string().required("Please fill your email"),
 })
 function forgot({handleSubmit,handleChange,handleBlur,touched,errors,values}){
+    const {user} = useContext(CreateUser);
+    if(user){
+        return <Navigate to="/" />
+    }
     return (
         <div className="flex  bg-gray-100 h-screen w-screen">
         <div className="flex flex-col px-4 py-2 gap-4 self-center mx-auto w-2/4 bg-white border rounded-xl">
