@@ -1,5 +1,5 @@
 import React, { memo, useContext } from "react";
-import { CreateContext } from "./App";
+import { CreateContext } from "./CartProvider";
 
 function addToCart({id,count}){
     const {addToCart} = useContext(CreateContext);

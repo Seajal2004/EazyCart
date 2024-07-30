@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import { CreateUser } from "./App";
 import axios from "axios";
+export const CreateUser = React.createContext();
 function UserDetail({children}){
     const [user,setUser] = useState();
     const [loading,setLoading] = useState(true);

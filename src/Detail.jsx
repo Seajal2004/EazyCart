@@ -6,6 +6,7 @@ import { ImSpinner6 } from "react-icons/im";
 import Error from './Error';
 import SelfModifiedInput from './selfModifiedInput';
 import AddToCart from './AddToCart';
+import productsImage from "./images/products.jpg"
 function Detail() {
     const param = useParams();
     const id = param.id;
@@ -51,7 +52,7 @@ function Detail() {
     <MdOutlineArrowBackIos className='text-2xl font-bold'/> Back
     </Link>
     <div className='flex flex-col sm:flex-row gap-4 sm:justify-center sm:gap-20'>
-    <img className="self-center w-1/4 max-h-96" src={product.images[0]} alt={"product "+ id}/>
+    <img className="self-center w-1/4 max-h-96" src={productsImage} alt={"product "+ id}/>
     <div className="sm:self-center mx-4 flex flex-col gap-3 max-w-2xl">
       <h1 className="text-4xl font-bold text-gray-500">{product.title}</h1>
       <h3 className="text-3xl font-bold text-gray-500 my-5">${product.price}</h3>

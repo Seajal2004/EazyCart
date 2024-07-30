@@ -1,37 +1,38 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link} from 'react-router-dom';
 import Cart from "./cart_product_detail";
-import { getProduct } from "./api";
 import { ImSpinner6 } from "react-icons/im";
 import SelfModifiedInput from "./selfModifiedInput";
 import NormalButton from "./NormalButton";
-import { CreateContext } from "./App";
+import { CreateContext } from "./CartProvider";
 function cart(){
-    const {cart,updateCart} = useContext(CreateContext);
-    const [cart_product,setCart] = useState([]);
-    const [dummy_cart,set_dummy] = useState(cart);
-    const keys_array = Object.keys(dummy_cart);
-    const totalCount =  cart_product.reduce(function(previous,current){
-        return previous + current.price*dummy_cart[current.id];
-    },0)
-    useEffect(function(){
-        const allPromise = keys_array.map(function(id){
-            return getProduct(id);
-        })
-        const allPromises = Promise.all(allPromise);
-        allPromises.then(function(product){
-            setCart(product)
-    
-    })
-   },[cart_product])
+    const {cart,updateCart,convertProducts} = useContext(CreateContext);
+    const [carts,setCart] = useState(cart);
+
+    const [cart_products,setCarts] = useState([]);
+    useEffect(()=>{
+        setCarts(convertProducts)
+    },[convertProducts]);
    
+    const totalCount =  cart_products.reduce(function(previous,current){
+        return previous + current.quantity*current.product.price;
+    },0)
+
    function handle_count(id,dummy_count){
-    const d = {...dummy_cart};
-    d[id] = dummy_count;
-    set_dummy(d);
+    const d = [...cart_products];
+    const x = {...cart};
+    x[id] = dummy_count;
+    for(let i=0;i<d.length;i++){
+        if(d[i].product.id==id){
+            d[i].quantity = dummy_count;
+        }
+    }
+    setCart(x);
+    setCarts(d);
    }
    function handle_cart(){
-    const m = {...dummy_cart};
+    const m = {...carts};
+    const keys_array = Object.keys(m);
     for(let i=0;i<keys_array.length;i++){
         if(m[keys_array[i]]==0){
             delete m[keys_array[i]];
@@ -39,7 +40,7 @@ function cart(){
     }
     updateCart(m);
    }
-   if(keys_array.length==0){
+   if(Object.keys(cart).length==0){
     return (
         <div className="flex flex-col gap-6 items-center">
         <h1 className="bold text-3xl">Your Cart Is Empty</h1>
@@ -60,12 +61,12 @@ function cart(){
                 <h3 className="bold text-xl w-20">Subtotal</h3>
             </div>
                 <hr />
-                {cart_product.length==0 && <ImSpinner6 className="text-5xl mx-auto animate-spin"/>}
-               {cart_product.length>0 && cart_product.map(function(item){
+                {cart_products.length==0 && <ImSpinner6 className="text-5xl mx-auto animate-spin"/>}
+               {cart_products.length>0 && cart_products.map(function(item){
                     return(
-                        <>
-                        <Cart cart={item} quantity={dummy_cart[item.id]} dummy_quan={handle_count}/>
-                        </>
+                        <div key={item.product.id}>
+                        <Cart  cart={item.product} quantity={item.quantity} dummy_quan={handle_count}/>
+                        </div>
                     )
                 })}
             <div className="flex py-2 justify-between px-2">
