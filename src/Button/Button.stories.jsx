@@ -1,23 +1,32 @@
+import Button from "./NormalButton";
 import React from "react";
-import NormalButton from "./NormalButton";
-import "../index.css";
+import "../index.css"
 
 const ButtonStory = {
-    title: "My Button",
-    component: NormalButton,  // Add component to the story
-};
+    title:"Button"
+} 
+
 export default ButtonStory;
 
-const Template = (args) => <NormalButton {...args} />;  // Ensure JSX is returned
 
-export const myPrimaryButton = Template.bind({});
-myPrimaryButton.args = {
+const Template  = (args) => <Button {...args}></Button>;
+
+
+
+export const Primary = Template.bind({});
+Primary.args = {
     name: "Primary",
-    type: "primary",
+  theme: 'primary',
 };
 
-export const mySecondaryButton = Template.bind({});
-mySecondaryButton.args = {
-    name: "Secondary",
-    type: "secondary",
+export const Secondary = Template.bind({});
+Secondary.args = {
+    name: "Secondry",
+  theme: 'secondary',
+};
+
+export const Danger = Template.bind({});
+Danger.args = {
+  name: 'Danger Button',
+  theme: 'danger',
 };
