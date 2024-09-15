@@ -3,7 +3,7 @@ import { Link} from 'react-router-dom';
 import Cart from "./cart_product_detail";
 import { ImSpinner6 } from "react-icons/im";
 import SelfModifiedInput from "./selfModifiedInput";
-import NormalButton from "./NormalButton";
+import NormalButton from "./Button/NormalButton";
 import { CreateContext } from "./CartProvider";
 function cart(){
     const {cart,updateCart,convertProducts} = useContext(CreateContext);
