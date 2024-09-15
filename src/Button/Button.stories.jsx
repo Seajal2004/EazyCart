@@ -16,17 +16,17 @@ const Template  = (args) => <Button {...args}></Button>;
 export const Primary = Template.bind({});
 Primary.args = {
     name: "Primary",
-  theme: 'primary',
+  type: 'primary',
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
     name: "Secondry",
-  theme: 'secondary',
+  type: 'secondary',
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
   name: 'Danger Button',
-  theme: 'danger',
+  type: 'danger',
 };
