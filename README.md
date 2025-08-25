@@ -1,4 +1,4 @@
-# 🛒 EazyKart 
+# 🛒 EazyKart
 
 EazyKart is a **modern e-commerce web application** built using **React.js and Vite**. It delivers a fast, responsive, and user-friendly online shopping experience.  
 
